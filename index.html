@@ -121,20 +121,42 @@ function generateEmailBody() {
   return body;
 }
 
-function sendEmail() {
+// Opens default email client
+function sendEmailDefault() {
   const subject = "Divestment";
   const body = generateEmailBody();
   const mailto = "mailto:will.fearn@icloud.com" +
                  "?subject=" + encodeURIComponent(subject) +
                  "&body=" + encodeURIComponent(body);
+
   window.location.href = mailto;
 }
 
+// Copy email body to clipboard
 function copyEmailBody() {
   const body = generateEmailBody();
   navigator.clipboard.writeText(body)
     .then(() => alert("Email body copied to clipboard!"))
     .catch(err => alert("Failed to copy: " + err));
+}
+
+// Optional: Open Gmail compose
+function sendEmailGmail() {
+  const name = document.getElementById("name").value;
+  const society = document.getElementById("society_name").value;
+
+  const to = "will.fearn@icloud.com";
+  const subject = "Divestment";
+  let body = "Dear Peter Mathieson,\n\nMy name is " + name;
+  if (society) body += " and I am writing on behalf of " + society;
+  body += ".\n\nI want divestment please :)\n\nThank you,\n" + name;
+
+  const gmailUrl = "https://mail.google.com/mail/?view=cm&fs=1" +
+                   "&to=" + encodeURIComponent(to) +
+                   "&su=" + encodeURIComponent(subject) +
+                   "&body=" + encodeURIComponent(body);
+
+  window.open(gmailUrl, "_blank");
 }
 </script>
 
@@ -145,9 +167,10 @@ function copyEmailBody() {
 <form>
 <h2>Email Campaign Form</h2>
 
-<body> Please input your details into this form, and it will generate a personalised email template that you can then send to the Senior Leadership Team. To have this email inserted automatically into your default email software, click "Send Email". To have the email copied to your clipboard to be used in the email software of your choice, click "Copy email".</body>
+<body> Please input your details into this form, and it will generate a personalised email template that you can then send to the Senior Leadership Team. To have this email inserted automatically into your default email software, click "Send Email". To have the email copied to your clipboard to be used in the email software of your choice, click "Copy email". Or you can send it via Gmail, by clicking the button!</body>
 
 <br></br>
+  
 <label for="name">Your name:</label>
 <input type="text" id="name" name="name">
 
@@ -160,8 +183,10 @@ function copyEmailBody() {
   <input type="text" id="society_name" name="society_name">
 </div>
 
-<button type="button" onclick="sendEmail()">Send Email</button>
+<!-- Buttons -->
+<button type="button" onclick="sendEmailDefault()">Send Email</button>
 <button type="button" onclick="copyEmailBody()">Copy Email</button>
+<button type="button" onclick="sendEmailGmail()">Send via Gmail</button>
 
 </form>
 
