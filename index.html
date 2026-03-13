@@ -5,34 +5,109 @@
 <title>Email Campaign Form</title>
 
 <style>
+/* ===== Global Styles ===== */
 body {
-  font-family: Arial, sans-serif;
-  max-width: 600px;
-  margin: 40px auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f5f7fa;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
 }
 
-.hidden {
-  display: none;
+form {
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 500px;
 }
 
+/* ===== Headings ===== */
+h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #1a1a1a;
+}
+
+/* ===== Inputs ===== */
+input[type="text"] {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 6px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  box-sizing: border-box;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+input[type="text"]:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 5px rgba(74,144,226,0.4);
+  outline: none;
+}
+
+/* ===== Radio Buttons ===== */
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+input[type="radio"] {
+  margin-right: 8px;
+}
+
+/* ===== Buttons ===== */
 button {
-  margin-top: 20px;
-  padding: 10px 16px;
+  background: #4a90e2;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 18px;
   font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  margin-top: 10px;
   margin-right: 10px;
 }
+
+button:hover {
+  background: #357ABD;
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* ===== Society input toggle ===== */
+.hidden {
+  display: none;
+  margin-top: 10px;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 500px) {
+  form {
+    padding: 25px 20px;
+  }
+  button {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+}
 </style>
-  <body>Please input your details into this form, and it will generate a personalised email template that you can then send to the Senior Leadership Team. To have this email inserted automatically into your default email software, click "Send Email". To have the email copied to your clipboard to be used in the email software of your choice, click "Copy email".</body>
+<body> "Please input your details into this form, and it will generate a personalised email template that you can then send to the Senior Leadership Team. To have this email inserted automatically into your default email software, click "Send Email". To have the email copied to your clipboard to be used in the email software of your choice, click "Copy email"."</body>
 <script>
 function toggleSocietyInput() {
   const yes = document.getElementById("society_yes");
   const box = document.getElementById("society_box");
-
-  if (yes.checked) {
-    box.style.display = "block";
-  } else {
-    box.style.display = "none";
-  }
+  box.style.display = yes.checked ? "block" : "none";
 }
 
 function generateEmailBody() {
@@ -40,9 +115,7 @@ function generateEmailBody() {
   const society = document.getElementById("society_name").value;
 
   let body = "Dear Peter Mathieson,\n\nMy name is " + name;
-  if (society) {
-    body += " and I am writing on behalf of " + society;
-  }
+  if (society) body += " and I am writing on behalf of " + society;
   body += ".\n\nI want divestment please :)\n\nThank you,\n" + name;
 
   return body;
@@ -51,22 +124,17 @@ function generateEmailBody() {
 function sendEmail() {
   const subject = "Divestment";
   const body = generateEmailBody();
-
   const mailto = "mailto:will.fearn@icloud.com" +
                  "?subject=" + encodeURIComponent(subject) +
                  "&body=" + encodeURIComponent(body);
-
   window.location.href = mailto;
 }
 
 function copyEmailBody() {
   const body = generateEmailBody();
-
-  navigator.clipboard.writeText(body).then(() => {
-    alert("Email body copied to clipboard!");
-  }).catch(err => {
-    alert("Failed to copy: " + err);
-  });
+  navigator.clipboard.writeText(body)
+    .then(() => alert("Email body copied to clipboard!"))
+    .catch(err => alert("Failed to copy: " + err));
 }
 </script>
 
@@ -74,34 +142,21 @@ function copyEmailBody() {
 
 <body>
 
+<form>
 <h2>Email Campaign Form</h2>
 
-<form>
-
-<label for="name">Your name:</label><br>
-<input type="text" id="name" name="name"><br><br>
+<label for="name">Your name:</label>
+<input type="text" id="name" name="name">
 
 <p>Are you writing on behalf of a society?</p>
-
-<label>
-  <input type="radio" name="society" id="society_yes" onclick="toggleSocietyInput()">
-  Yes
-</label>
-
-<label>
-  <input type="radio" name="society" id="society_no" onclick="toggleSocietyInput()">
-  No
-</label>
+<label><input type="radio" name="society" id="society_yes" onclick="toggleSocietyInput()"> Yes</label>
+<label><input type="radio" name="society" id="society_no" onclick="toggleSocietyInput()"> No</label>
 
 <div id="society_box" class="hidden">
-  <br>
-  <label for="society_name">Which society?</label><br>
+  <label for="society_name">Which society?</label>
   <input type="text" id="society_name" name="society_name">
 </div>
 
-<br>
-
-<!-- Buttons -->
 <button type="button" onclick="sendEmail()">Send Email</button>
 <button type="button" onclick="copyEmailBody()">Copy Email Body</button>
 
