@@ -19,9 +19,10 @@ button {
   margin-top: 20px;
   padding: 10px 16px;
   font-size: 16px;
+  margin-right: 10px;
 }
 </style>
-
+  <body>Please input your details into this form, and it will generate a personalised email template that you can then send to the Senior Leadership Team. To have this email inserted automatically into your default email software, click "Send Email". To have the email copied to your clipboard to be used in the email software of your choice, click "Copy email".</body>
 <script>
 function toggleSocietyInput() {
   const yes = document.getElementById("society_yes");
@@ -34,25 +35,38 @@ function toggleSocietyInput() {
   }
 }
 
-function sendEmail() {
+function generateEmailBody() {
   const name = document.getElementById("name").value;
   const society = document.getElementById("society_name").value;
 
-  const subject = "Divestment";
-
-  // Build the body
   let body = "Dear Peter Mathieson,\n\nMy name is " + name;
   if (society) {
     body += " and I am writing on behalf of " + society;
   }
   body += ".\n\nI want divestment please :)\n\nThank you,\n" + name;
 
-  // Encode and open mail client
+  return body;
+}
+
+function sendEmail() {
+  const subject = "Divestment";
+  const body = generateEmailBody();
+
   const mailto = "mailto:will.fearn@icloud.com" +
                  "?subject=" + encodeURIComponent(subject) +
                  "&body=" + encodeURIComponent(body);
 
   window.location.href = mailto;
+}
+
+function copyEmailBody() {
+  const body = generateEmailBody();
+
+  navigator.clipboard.writeText(body).then(() => {
+    alert("Email body copied to clipboard!");
+  }).catch(err => {
+    alert("Failed to copy: " + err);
+  });
 }
 </script>
 
@@ -87,7 +101,9 @@ function sendEmail() {
 
 <br>
 
-<button type="button" onclick="sendEmail()">Continue</button>
+<!-- Buttons -->
+<button type="button" onclick="sendEmail()">Send Email</button>
+<button type="button" onclick="copyEmailBody()">Copy Email Body</button>
 
 </form>
 
