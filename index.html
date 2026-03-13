@@ -125,7 +125,7 @@ function generateEmailBody() {
 function sendEmailDefault() {
   const subject = "Divestment";
   const body = generateEmailBody();
-  const mailto = "mailto:will.fearn@icloud.com" +
+  const mailto = "mailto:jawbone2289@proton.me" +
                  "?subject=" + encodeURIComponent(subject) +
                  "&body=" + encodeURIComponent(body);
 
@@ -145,7 +145,7 @@ function sendEmailGmail() {
   const name = document.getElementById("name").value;
   const society = document.getElementById("society_name").value;
 
-  const to = "will.fearn@icloud.com";
+  const to = "jawbone2289@proton.me";
   const subject = "Divestment";
   let body = "Dear Peter Mathieson,\n\nMy name is " + name;
   if (society) body += " and I am writing on behalf of " + society;
