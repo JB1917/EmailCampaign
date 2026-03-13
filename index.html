@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -24,7 +24,6 @@ button {
 
 <script>
 function toggleSocietyInput() {
-
   const yes = document.getElementById("society_yes");
   const box = document.getElementById("society_box");
 
@@ -33,7 +32,27 @@ function toggleSocietyInput() {
   } else {
     box.style.display = "none";
   }
+}
 
+function sendEmail() {
+  const name = document.getElementById("name").value;
+  const society = document.getElementById("society_name").value;
+
+  const subject = "Divestment";
+
+  // Build the body
+  let body = "Dear Peter Mathieson,\n\nMy name is " + name;
+  if (society) {
+    body += " and I am writing on behalf of " + society;
+  }
+  body += ".\n\nI want divestment please :)\n\nThank you,\n" + name;
+
+  // Encode and open mail client
+  const mailto = "mailto:will.fearn@icloud.com" +
+                 "?subject=" + encodeURIComponent(subject) +
+                 "&body=" + encodeURIComponent(body);
+
+  window.location.href = mailto;
 }
 </script>
 
@@ -48,32 +67,27 @@ function toggleSocietyInput() {
 <label for="name">Your name:</label><br>
 <input type="text" id="name" name="name"><br><br>
 
-
 <p>Are you writing on behalf of a society?</p>
 
 <label>
-<input type="radio" name="society" id="society_yes" onclick="toggleSocietyInput()">
-Yes
+  <input type="radio" name="society" id="society_yes" onclick="toggleSocietyInput()">
+  Yes
 </label>
 
 <label>
-<input type="radio" name="society" id="society_no" onclick="toggleSocietyInput()">
-No
+  <input type="radio" name="society" id="society_no" onclick="toggleSocietyInput()">
+  No
 </label>
 
-
 <div id="society_box" class="hidden">
-<br>
-<label for="society_name">Which society?</label><br>
-<input type="text" id="society_name" name="society_name">
+  <br>
+  <label for="society_name">Which society?</label><br>
+  <input type="text" id="society_name" name="society_name">
 </div>
 
-
 <br>
 
-<a href="mailto:will.fearn@icloud.com?subject=Divestment&body=Dear%20Peter%20Mathieson%2C%0A%0AMy%20name%20is%20%7B(name)%7D%20and%20I%20am%20writing%20on%20behalf%20of%20%7B(society_name)%7D.%0A%0AI%20want%20divestment%20please%20%3A)%0A%0AThank%20you%2C%0A%7B{Name}%7D">
-<button type="button">Continue</button>
-</a>
+<button type="button" onclick="sendEmail()">Continue</button>
 
 </form>
 
