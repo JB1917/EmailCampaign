@@ -1,194 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Email Campaign Form</title>
-
-<style>
-/* ===== Global Styles ===== */
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #f5f7fa;
-  color: #333;
-  display: flex;
-  justify-content: center;
-  padding: 40px 20px;
-}
-
-form {
-  background: #fff;
-  padding: 30px 40px;
-  border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
-  width: 100%;
-  max-width: 500px;
-}
-
-/* ===== Headings ===== */
-h2 {
-  text-align: center;
-  margin-bottom: 25px;
-  color: #1a1a1a;
-}
-
-/* ===== Inputs ===== */
-input[type="text"] {
-  width: 100%;
-  padding: 10px 12px;
-  margin-top: 6px;
-  margin-bottom: 20px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 15px;
-  box-sizing: border-box;
-  transition: border 0.3s, box-shadow 0.3s;
-}
-
-input[type="text"]:focus {
-  border-color: #4a90e2;
-  box-shadow: 0 0 5px rgba(74,144,226,0.4);
-  outline: none;
-}
-
-/* ===== Radio Buttons ===== */
-label {
-  display: block;
-  margin-bottom: 10px;
-  font-weight: 500;
-}
-
-input[type="radio"] {
-  margin-right: 8px;
-}
-
-/* ===== Buttons ===== */
-button {
-  background: #4a90e2;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  padding: 12px 18px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
-  margin-top: 10px;
-  margin-right: 10px;
-}
-
-button:hover {
-  background: #357ABD;
-  transform: translateY(-2px);
-}
-
-button:active {
-  transform: translateY(0);
-}
-
-/* ===== Society input toggle ===== */
-.hidden {
-  display: none;
-  margin-top: 10px;
-}
-
-/* ===== Responsive ===== */
-@media (max-width: 500px) {
-  form {
-    padding: 25px 20px;
-  }
-  button {
-    width: 100%;
-    margin-right: 0;
-    margin-bottom: 10px;
-  }
-}
-</style>
-
-<script>
-function toggleSocietyInput() {
-  const yes = document.getElementById("society_yes");
-  const box = document.getElementById("society_box");
-  box.style.display = yes.checked ? "block" : "none";
-}
-
-function generateEmailBody() {
-  const name = document.getElementById("name").value;
-  const society = document.getElementById("society_name").value;
-
-  let body = "Dear Peter Mathieson,\n\nMy name is " + name;
-  if (society) body += " and I am writing on behalf of " + society;
-  body += ".\n\nI want divestment please :)\n\nThank you,\n" + name;
-
-  return body;
-}
-
-// Opens default email client
-function sendEmailDefault() {
-  const subject = "Divestment";
-  const body = generateEmailBody();
-  const mailto = "mailto:jawbone2289@proton.me" +
-                 "?subject=" + encodeURIComponent(subject) +
-                 "&body=" + encodeURIComponent(body);
-
-  window.location.href = mailto;
-}
-
-// Copy email body to clipboard
-function copyEmailBody() {
-  const body = generateEmailBody();
-  navigator.clipboard.writeText(body)
-    .then(() => alert("Email body copied to clipboard!"))
-    .catch(err => alert("Failed to copy: " + err));
-}
-
-// Optional: Open Gmail compose
-function sendEmailGmail() {
-  const name = document.getElementById("name").value;
-  const society = document.getElementById("society_name").value;
-
-  const to = "jawbone2289@proton.me";
-  const subject = "Divestment";
-  let body = "Dear Peter Mathieson,\n\nMy name is " + name;
-  if (society) body += " and I am writing on behalf of " + society;
-  body += ".\n\nI want divestment please :)\n\nThank you,\n" + name;
-
-  const gmailUrl = "https://mail.google.com/mail/?view=cm&fs=1" +
-                   "&to=" + encodeURIComponent(to) +
-                   "&su=" + encodeURIComponent(subject) +
-                   "&body=" + encodeURIComponent(body);
-
-  window.open(gmailUrl, "_blank");
-}
-</script>
-
+  <meta charset="UTF-8">
+  <title>Email Campaign Tool</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 40px auto;
+    }
+    input, textarea, button {
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px;
+      font-size: 14px;
+    }
+    button {
+      cursor: pointer;
+    }
+  </style>
 </head>
-
 <body>
 
-<form>
-<h2>Email Campaign Form</h2>
+<h2>Email Campaign Generator</h2>
 
-<body> Please input your details into this form, and it will generate a personalised email template that you can then send to the Senior Leadership Team. To have this email inserted automatically into your default email software, click "Send Email". To have the email copied to your clipboard to be used in the email software of your choice, click "Copy email". Or you can send it via Gmail, by clicking the button!</body>
+<label>Name:</label>
+<input type="text" id="name" placeholder="Your name">
 
-<br></br>
-  
-<label for="name">Your name:</label>
-<input type="text" id="name" name="name">
+<label>Year:</label>
+<input type="text" id="year" placeholder="e.g. 2nd Year">
 
-<p>Are you writing on behalf of a society?</p>
-<label><input type="radio" name="society" id="society_yes" onclick="toggleSocietyInput()"> Yes</label>
-<label><input type="radio" name="society" id="society_no" onclick="toggleSocietyInput()"> No</label>
+<label>Degree:</label>
+<input type="text" id="degree" placeholder="e.g. BSc Computer Science">
 
-<div id="society_box" class="hidden">
-  <label for="society_name">Which society?</label>
-  <input type="text" id="society_name" name="society_name">
-</div>
+<label>Generated Email:</label>
+<textarea id="emailBody" rows="10" readonly></textarea>
 
-<!-- Buttons -->
-<button type="button" onclick="sendEmailDefault()">Send Email</button>
-<button type="button" onclick="copyEmailBody()">Copy Email</button>
-<button type="button" onclick="sendEmailGmail()">Send via Gmail</button>
+<button onclick="generateEmail()">Generate Email</button>
+<button onclick="openMailto()">Open in Default Email App</button>
+<button onclick="openGmail()">Open in Gmail</button>
+<button onclick="copyToClipboard()">Copy to Clipboard</button>
 
-</form>
+<script>
+const recipients = [
+  "will.fearn@icloud.com",
+  "willfearn05@gmail.com",
+  "example3@email.com"
+];
+
+function generateEmail() {
+  const name = document.getElementById("name").value;
+  const year = document.getElementById("year").value;
+  const degree = document.getElementById("degree").value;
+
+  const body = `Dear Sir/Madam,
+
+My name is ${name}, and I am currently a ${year} student studying ${degree}.
+
+I am reaching out to express my interest in potential opportunities.
+
+I would greatly appreciate any information you can provide.
+
+Kind regards,
+${name}`;
+
+  document.getElementById("emailBody").value = body;
+}
+
+function openMailto() {
+  const subject = encodeURIComponent("Inquiry from Student");
+  const body = encodeURIComponent(document.getElementById("emailBody").value);
+  const to = recipients.join(",");
+
+  window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+}
+
+function openGmail() {
+  const subject = encodeURIComponent("Inquiry from Student");
+  const body = encodeURIComponent(document.getElementById("emailBody").value);
+  const to = recipients.join(",");
+
+  const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${to}&su=${subject}&body=${body}`;
+  window.open(gmailUrl, "_blank");
+}
+
+function copyToClipboard() {
+  const text = document.getElementById("emailBody");
+  text.select();
+  document.execCommand("copy");
+  alert("Copied to clipboard!");
+}
+</script>
 
 </body>
 </html>
