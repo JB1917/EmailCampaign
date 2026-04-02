@@ -22,7 +22,7 @@
 </head>
 <body>
 
-<h2>Email Campaign Generator</h2>
+<h2>Email Campaign</h2>
 
 <label>Name:</label>
 <input type="text" id="name" placeholder="Your name">
@@ -53,16 +53,47 @@ function generateEmail() {
   const year = document.getElementById("year").value;
   const degree = document.getElementById("degree").value;
 
-  const body = `Dear Sir/Madam,
+  const body = `Dear Senior Leadership Team,
 
-My name is ${name}, and I am currently a ${year} student studying ${degree}.
+I write to you as a student of the University of Edinburgh community with deep concern and growing frustration — our institution is one that too often places financial interests above our core educational mission, our ethical obligations, and the wellbeing of the people who make this university what it is.
 
-I am reaching out to express my interest in potential opportunities.
+The University of Edinburgh has a proud intellectual tradition and a responsibility to uphold the values of justice, integrity, and human dignity. It is in that spirit that I raise the following urgent concerns.
 
-I would greatly appreciate any information you can provide.
 
-Kind regards,
+**Complicity through collaboration**
+
+The university's ongoing and prospective partnerships with arms, defence, and AI companies that are actively complicit in the genocide in Gaza represent a profound moral failure. These are not abstract concerns — people are dying, and our institution must not profit from, nor lend legitimacy to, those contributing to that violence. I urge leadership to immediately review and terminate any such relationships, including the £25,500,000 of direct investments in Alphabet, Amazon, Microsoft and Meta, which uphold the infrastructure of apartheid and ethnic cleansing in Palestine, and to commit publicly to refusing future partnerships with companies implicated in war crimes.
+
+
+**The Responsible Investment Advisory Group is not enough**
+
+I am acutely aware that questions around AI as a controversial weapon have been referred to the Responsible Investment Advisory Group. While I appreciate the existence of such a body, using it as a reason to delay decisive action is unacceptable. The harm being caused is happening now. The university cannot continue to hide behind a process that has no clear timeline, no transparency, and no accountability to students or staff. I call on leadership to set a firm and significantly expedited public deadline for the RIAG's verdict on AI partnerships and to commit to acting on its findings without further delay.
+
+
+**An ethical careers policy is long overdue**
+
+Students deserve to know that the university's careers service, employer partnerships, and on-campus recruitment are governed by a robust ethical framework. The absence of a meaningful ethical careers policy is a glaring omission that leaves students without protection and sends a troubling signal about our institution's values. I urge the university to develop and publish such a policy in genuine consultation with students and staff.
+
+
+**Staff must be properly paid**
+
+This university cannot claim to value its community while continuing to underpay the staff who deliver its world-class education and research. Fair pay is not a luxury — it is a baseline requirement of any institution that takes its responsibilities seriously. I urge leadership to honour pay agreements, address the gender and ethnicity pay gaps, and end the casualisation of academic and professional services work.
+
+
+**Student societies must be properly funded**
+
+Student societies are the lifeblood of university life. Cutting or freezing their funding while the university pursues lucrative corporate partnerships is a contradiction that students will not ignore. I call on leadership to ring-fence and increase funding for student societies as a genuine investment in student wellbeing and community, such that they don't have to consider funding from arms companies in place of real support.
+
+
+I want to be clear: the frustration I and many others feel is not born of a desire to be obstructive. It comes from a place of genuine desire to feel pride for this institution and a belief that it can — and must — do better. The pace of change so far has been deeply disappointing. Words and working groups are not enough.
+
+
+I respectfully but firmly call on you to act with the urgency this moment demands.
+
+Yours sincerely,
 ${name}`;
+${year} ${degree}
+
 
   document.getElementById("emailBody").value = body;
 }
